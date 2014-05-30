@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A5E096347B44BCDAC3445ED /* libPods-CollectionsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 268298631FE849D4908BFA9D /* libPods-CollectionsTests.a */; };
 		7228E49B1939369700BF7F4A /* FISCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228E49A1939369700BF7F4A /* FISCollections.m */; };
+		7228E49D1939378A00BF7F4A /* FISCollectionsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228E49C1939378A00BF7F4A /* FISCollectionsSpec.m */; };
 		72C9ACDA19392571001830F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C9ACD919392571001830F1 /* Foundation.framework */; };
 		72C9ACDC19392571001830F1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C9ACDB19392571001830F1 /* CoreGraphics.framework */; };
 		72C9ACDE19392571001830F1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C9ACDD19392571001830F1 /* UIKit.framework */; };
@@ -36,6 +37,7 @@
 		268298631FE849D4908BFA9D /* libPods-CollectionsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CollectionsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7228E4991939369700BF7F4A /* FISCollections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FISCollections.h; sourceTree = "<group>"; };
 		7228E49A1939369700BF7F4A /* FISCollections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISCollections.m; sourceTree = "<group>"; };
+		7228E49C1939378A00BF7F4A /* FISCollectionsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISCollectionsSpec.m; sourceTree = "<group>"; };
 		72C9ACD619392571001830F1 /* Collections.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Collections.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72C9ACD919392571001830F1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		72C9ACDB19392571001830F1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -138,6 +140,7 @@
 		72C9ACF819392571001830F1 /* CollectionsTests */ = {
 			isa = PBXGroup;
 			children = (
+				7228E49C1939378A00BF7F4A /* FISCollectionsSpec.m */,
 				72C9ACF919392571001830F1 /* Supporting Files */,
 			);
 			path = CollectionsTests;
@@ -293,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7228E49D1939378A00BF7F4A /* FISCollectionsSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
