@@ -10,6 +10,17 @@
 
 @interface FISCollections : NSObject
 
-//declare methods here
+-(NSArray *)sortArrayAsc:(NSArray *)array;
+-(NSArray *)sortArrayDesc:(NSArray *)array;
+-(NSArray *)swapElements:(NSArray *)array;
+-(NSArray *)reverseArray:(NSArray *)array;
+-(NSArray *)keshaMaker:(NSArray *)array;
+-(NSDictionary *)greaterAndLessThan10:(NSArray *)array;
+-(NSArray *)findWinners:(NSDictionary *)peeps;
+-(NSArray *)findA:(NSArray *)array;
+-(NSInteger)sumArray:(NSArray *)array;
+-(NSArray *)addS:(NSArray *)array;
+-(NSDictionary *)countWordsInStory:(NSString *)story;
+-(NSDictionary *)organizeSongsByArtist:(NSArray *)jams;
 
 @end
