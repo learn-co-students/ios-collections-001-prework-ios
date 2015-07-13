@@ -10,40 +10,190 @@
 
 @implementation FISAppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+/**
+ 
+ * Define your methods here.
+ 
+ */
+
+-(NSArray *)arrayByAscendingSortingArray:(NSArray *)array {
+    NSSortDescriptor *sortByNilAsc = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
+    
+    return [array sortedArrayUsingDescriptors:@[sortByNilAsc]];
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+-(NSArray *)arrayByDescendingSortingArray:(NSArray *)array {
+    NSSortDescriptor *sortByNilDesc = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
+    
+    return [array sortedArrayUsingDescriptors:@[sortByNilDesc]];
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+-(NSArray *)arrayBySwappingFirstObjectWithLastObjectInArray:(NSArray *)array {
+    NSMutableArray *mutableArray = [array mutableCopy];
+    NSUInteger endIndex = mutableArray.count - 1;
+    
+    [mutableArray exchangeObjectAtIndex:0 withObjectAtIndex:endIndex];
+    return [NSArray arrayWithArray:mutableArray];
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+-(NSArray *)arrayByReversingArray:(NSArray *)array {
+    NSMutableArray *mutableArray = [array mutableCopy];
+    
+    for (NSUInteger i = 0 ; i < (mutableArray.count / 2); i++) {
+        NSUInteger j = mutableArray.count - 1 - i;
+        [mutableArray exchangeObjectAtIndex:i withObjectAtIndex:j];
+    }
+    
+    return [NSArray arrayWithArray:mutableArray];
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+
+
+-(NSString *)stringInBasicLeetFromString:(NSString *)string {
+    NSDictionary *conversions = @{ @"a" : @"4" ,
+                                   @"s" : @"5" ,
+                                   @"i" : @"1" ,
+                                   @"l" : @"1" ,
+                                   @"e" : @"3" ,
+                                   @"t" : @"7" };
+    NSString *leetString = string;
+    
+    for (NSString *key in conversions) {
+        leetString = [leetString stringByReplacingOccurrencesOfString:key withString:conversions[key]];
+    }
+    
+    return leetString;
 }
+
+-(NSArray *)bisectArrayAt0:(NSArray *)array {
+    NSMutableArray *negative = [[NSMutableArray alloc] init];
+    NSMutableArray *positive = [[NSMutableArray alloc] init];
+    
+    for (NSNumber *number in array) {
+        if ([number floatValue] < 0 ) {
+            [negative addObject:number];
+        } else if ([number floatValue] > 0) {
+            [positive addObject:number];
+        }
+    }
+    
+    return @[negative, positive];
+}
+
+-(NSArray *)arrayByFilteringHobbitsFromDictionary:(NSDictionary *)dictionary {
+    NSMutableArray *hobbits = [[NSMutableArray alloc] init];
+    
+    for (NSString *key in dictionary) {
+        if ([dictionary[key] isEqualToString:@"hobbit"]) {
+            [hobbits addObject:key];
+        }
+    }
+
+    return [NSArray arrayWithArray:hobbits];
+}
+
+-(NSArray *)arrayByFilteringStringsBeginningWithA:(NSArray *)array {
+    
+    NSPredicate *beginsWithAPredicate = [NSPredicate predicateWithFormat:@"self BEGINSWITH[c] 'a'"];
+    NSArray *beginsWithA = [array filteredArrayUsingPredicate:beginsWithAPredicate];
+    
+    return beginsWithA;
+}
+
+
+-(NSInteger)sumOfIntegerNumbersInArray:(NSArray *)array {
+    
+    NSInteger sum = 0;
+    for (NSNumber *number in array) {
+        sum = sum + [number integerValue];
+    }
+    
+    return sum;
+}
+
+
+-(NSArray *)arrayByPluralizingStringsInArray:(NSArray *)array {
+    
+    NSMutableArray *plurals = [[NSMutableArray alloc] init];
+    
+    for (NSString *singular in array) {
+        NSString *plural = @"";
+        if ([singular containsString:@"oo"]) {
+            plural = [singular stringByReplacingOccurrencesOfString:@"oo" withString:@"ee"];
+        } else if ([singular containsString:@"ox"]) {
+            if ([singular hasPrefix:@"b"]) {
+                plural = [singular stringByAppendingString:@"es"];
+            } else {
+                plural = [singular stringByAppendingString:@"en"];
+            }
+        } else if ([singular hasSuffix:@"us"]) {
+            plural = [singular stringByReplacingOccurrencesOfString:@"us" withString:@"i"];
+        } else if ([singular hasSuffix:@"um"]) {
+            plural = [singular stringByReplacingOccurrencesOfString:@"um" withString:@"a"];
+        } else {
+            plural = [singular stringByAppendingString:@"s"];
+        }
+        [plurals addObject:plural];
+    }
+    
+    return [NSArray arrayWithArray:plurals];
+}
+
+-(NSDictionary *)countsOfWordsInString:(NSString *)string {
+    NSArray *punctuationStrings = @[@".", @",", @";", @"-"];
+    
+    NSString *noPunctuation = string;
+    
+    for (NSString *punctuation in punctuationStrings) {
+        noPunctuation = [noPunctuation stringByReplacingOccurrencesOfString:punctuation withString:@""];
+    }
+    
+    NSString *lowercaseNoPunctuation = [noPunctuation lowercaseString];
+    
+    NSArray *arrayOfWords = [lowercaseNoPunctuation componentsSeparatedByString:@" "];
+    
+    NSMutableDictionary *countsOfWords = [[NSMutableDictionary alloc] init];
+    
+    for (NSString *word in arrayOfWords) {
+        if ([countsOfWords[word] integerValue] > 0) {
+            NSInteger newCount = [countsOfWords[word] integerValue] + 1;
+            countsOfWords[word] = @(newCount);
+        } else {
+            countsOfWords[word] = @1;
+        }
+    }
+    
+    return [NSDictionary dictionaryWithDictionary:countsOfWords];
+}
+
+-(NSDictionary *)dictionaryOfSongsByArtistFromArray:(NSArray *)array {
+    NSMutableDictionary *artistsWithSongs = [[NSMutableDictionary alloc] init];
+    
+    for (NSString *string in array) {
+        NSArray *artistAndSong = [string componentsSeparatedByString:@" - "];
+        NSString *artist = artistAndSong[0];
+        NSString *song = artistAndSong[1];
+        
+        if ([[artistsWithSongs allKeys] containsObject:artist]) {
+            [artistsWithSongs[artist] addObject:song];
+        } else {
+            artistsWithSongs[artist] = [ @[song] mutableCopy];
+        }
+    }
+    
+    NSSortDescriptor *sortByNilAsc = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
+    for (NSString *artist in artistsWithSongs) {
+        [artistsWithSongs[artist] sortUsingDescriptors:@[sortByNilAsc]];
+    }
+    
+    return [NSDictionary dictionaryWithDictionary:artistsWithSongs];
+}
+
 
 @end
