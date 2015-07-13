@@ -44,12 +44,10 @@
 
 -(NSArray *)arrayByReversingArray:(NSArray *)array {
     NSMutableArray *mutableArray = [array mutableCopy];
-    NSUInteger i = 0;
-    NSUInteger j = mutableArray.count - 1;
     
-    for ( ; i < (mutableArray.count / 2); i++) {
+    for (NSUInteger i = 0 ; i < (mutableArray.count / 2); i++) {
+        NSUInteger j = mutableArray.count - 1 - i;
         [mutableArray exchangeObjectAtIndex:i withObjectAtIndex:j];
-        j--;
     }
     
     return [NSArray arrayWithArray:mutableArray];
@@ -164,9 +162,8 @@
     
     for (NSString *word in arrayOfWords) {
         if ([countsOfWords[word] integerValue] > 0) {
-            NSInteger count = [countsOfWords[word] integerValue];
-            count++;
-            countsOfWords[word] = @(count);
+            NSInteger newCount = [countsOfWords[word] integerValue] + 1;
+            countsOfWords[word] = @(newCount);
         } else {
             countsOfWords[word] = @1;
         }
