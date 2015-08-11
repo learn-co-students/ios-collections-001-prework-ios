@@ -106,21 +106,21 @@ describe(@"FISAppDelegate", ^{
                            };
     });
     
-    describe(@"1 arrayByAscendingSortingArray:", ^{
+    describe(@"arrayBySortingArrayAscending:", ^{
         it(@"returns the contents of the submitted array sorted in ascending order", ^{
             NSArray *ascendingPrimes = @[ @2, @3, @5, @7, @11, @13, @17, @19, @23 ];
-            expect([appDelegate arrayByAscendingSortingArray:chaoticPrimes]).to.equal(ascendingPrimes);
+            expect([appDelegate arrayBySortingArrayAscending:chaoticPrimes]).to.equal(ascendingPrimes);
         });
     });
     
-    describe(@"2 arrayByDescendingSortingArray:", ^{
+    describe(@"arrayBySortingArrayDescending:", ^{
         it(@"returns the contents of the submitted array sorted in descending order", ^{
             NSArray *descendingPrimes = @[ @23, @19, @17, @13, @11, @7, @5, @3, @2];
-            expect([appDelegate arrayByDescendingSortingArray:chaoticPrimes]).to.equal(descendingPrimes);
+            expect([appDelegate arrayBySortingArrayDescending:chaoticPrimes]).to.equal(descendingPrimes);
         });
     });
     
-    describe(@"3 arrayBySwappingFirstObjectWithLastObjectInArray:", ^{
+    describe(@"arrayBySwappingFirstObjectWithLastObjectInArray:", ^{
         it(@"returns an NSArray object", ^{
             expect([appDelegate arrayBySwappingFirstObjectWithLastObjectInArray:chaoticPrimes]).to.beKindOf([NSArray class]);
         });
@@ -138,7 +138,7 @@ describe(@"FISAppDelegate", ^{
         });
     });
     
-    describe(@"4 arrayByReversingArray:", ^{
+    describe(@"arrayByReversingArray:", ^{
         it(@"returns an NSArray object", ^{
             expect([appDelegate arrayByReversingArray:chaoticPrimes]).to.beKindOf([NSArray class]);
         });
@@ -156,7 +156,7 @@ describe(@"FISAppDelegate", ^{
         });
     });
     
-    describe(@"5 stringInBasicLeetFromString:", ^{
+    describe(@"stringInBasicLeetFromString:", ^{
         it(@"returns an NSString object", ^{
             expect([appDelegate stringInBasicLeetFromString:@"string"]).to.beKindOf([NSString class]);
         });
@@ -168,81 +168,78 @@ describe(@"FISAppDelegate", ^{
         });
     });
     
-    describe(@"6 bisectArrayAt0:", ^{
+    describe(@"splitArrayIntoNegativesAndPositives:", ^{
         it(@"returns an NSArray object", ^{
-            expect([appDelegate bisectArrayAt0:numbersToBisect]).to.beKindOf([NSArray class]);
+            expect([appDelegate splitArrayIntoNegativesAndPositives:numbersToBisect]).to.beKindOf([NSArray class]);
         });
 
         it(@"returns an array with two sub-arrays", ^{
-            expect([appDelegate bisectArrayAt0:numbersToBisect].count).to.equal(2);
+            expect([appDelegate splitArrayIntoNegativesAndPositives:numbersToBisect].count).to.equal(2);
         });
         
         it(@"returns an array with only values less than zero in the first sub-array", ^{
-            NSArray *bisectedArray = [appDelegate bisectArrayAt0:numbersToBisect];
+            NSArray *bisectedArray = [appDelegate splitArrayIntoNegativesAndPositives:numbersToBisect];
             for (NSNumber *number in bisectedArray[0]) {
                 expect([number integerValue]).to.beLessThan(0);
             }
         });
         
         it(@"returns an array with the correct number of values less than zero in the first sub-array", ^{
-            NSArray *bisectedArray = [appDelegate bisectArrayAt0:numbersToBisect];
+            NSArray *bisectedArray = [appDelegate splitArrayIntoNegativesAndPositives:numbersToBisect];
             
             expect([bisectedArray[0] count]).to.equal(4);
         });
         
         it(@"returns an array with only values greater than zero in the second sub-array", ^{
-            NSArray *bisectedArray = [appDelegate bisectArrayAt0:numbersToBisect];
+            NSArray *bisectedArray = [appDelegate splitArrayIntoNegativesAndPositives:numbersToBisect];
             for (NSNumber *number in bisectedArray[1]) {
-                expect([number integerValue]).to.beGreaterThan(0);
+                expect([number integerValue]).to.beGreaterThanOrEqualTo(0);
             }
         });
         
         it(@"returns an array with the correct number of values greater than zero in the first sub-array", ^{
-            NSArray *bisectedArray = [appDelegate bisectArrayAt0:numbersToBisect];
+            NSArray *bisectedArray = [appDelegate splitArrayIntoNegativesAndPositives:numbersToBisect];
             
             expect([bisectedArray[1] count]).to.equal(4);
         });
     });
     
-    describe(@"7 arrayByFilteringHobbitsFromDictionary:", ^{
+    describe(@"namesOfHobbitsInDictionary:", ^{
         it(@"returns an NSArray object", ^{
-            expect([appDelegate arrayByFilteringHobbitsFromDictionary:fellowshipOfTheRing]).to.beKindOf([NSArray class]);
+            expect([appDelegate namesOfHobbitsInDictionary:fellowshipOfTheRing]).to.beKindOf([NSArray class]);
         });
-        
-        it(@"returns an array with four strings", ^{
-            expect([appDelegate arrayByFilteringHobbitsFromDictionary:fellowshipOfTheRing].count).to.equal(4);
-        });
-        
+
         it(@"returns an array with the correct names of the hobbits", ^{
-            NSArray *hobbits = [appDelegate arrayByFilteringHobbitsFromDictionary:fellowshipOfTheRing];
-            
+            NSArray *hobbits = [appDelegate namesOfHobbitsInDictionary:fellowshipOfTheRing];
+
+            expect(hobbits).to.haveACountOf(4);
             expect(hobbits).to.beSupersetOf(@[@"Frodo", @"Sam", @"Merry", @"Pippin"]);
         });
 
     });
     
-    describe(@"8 arrayByFilteringStringsBeginningWithA:", ^{
+    describe(@"stringsBeginningWithAInArray:", ^{
         it(@"returns an NSArray object", ^{
-            expect([appDelegate arrayByFilteringStringsBeginningWithA:foods]).to.beKindOf([NSArray class]);
+            expect([appDelegate stringsBeginningWithAInArray:foods]).to.beKindOf([NSArray class]);
         });
         
         it(@"returns all of and only the words that beginning with 'a'", ^{
             
-            expect([appDelegate arrayByFilteringStringsBeginningWithA:foods]).to.equal(foodsBeginningWithA);
+            expect([appDelegate stringsBeginningWithAInArray:foods]).to.equal(foodsBeginningWithA);
         });
     });
     
-    describe(@"9 sumOfIntegerNumbersInArray:", ^{
+    describe(@"sumOfIntegersInArray:", ^{
         it(@"returns the sum of all the integer numbers in the submitted array with positive values", ^{
-            expect([appDelegate sumOfIntegerNumbersInArray:chaoticPrimes]).to.equal(100);
+            expect([appDelegate sumOfIntegersInArray:chaoticPrimes]).to.equal(100);
         });
         
         it(@"returns the sum of all the integer numbers in the submitted array with positive and negative values", ^{
-            expect([appDelegate sumOfIntegerNumbersInArray:numbersToBisect]).to.equal(0);
+            expect([appDelegate sumOfIntegersInArray:numbersToBisect]).to.equal(0);
         });
     });
     
-    describe(@"10 arrayByPluralizingStringsInArray:", ^{
+    describe(@"arrayByPluralizingStringsInArray:", ^{
         it(@"returns an NSArray object", ^{
             expect([appDelegate arrayByPluralizingStringsInArray:@[@"string"]]).to.beKindOf([NSArray class]);
         });
@@ -253,7 +250,7 @@ describe(@"FISAppDelegate", ^{
         });
     });
     
-    describe(@"11 countsOfWordsInString:", ^{
+    describe(@"countsOfWordsInString:", ^{
         it(@"returns an NSDictionary object", ^{
             expect([appDelegate countsOfWordsInString:@"string"]).to.beKindOf([NSDictionary class]);
         });
@@ -265,14 +262,14 @@ describe(@"FISAppDelegate", ^{
         });
     });
     
-    describe(@"12 dictionaryOfSongsByArtistFromArray:", ^{
+    describe(@"songsGroupedByArtistFromArray:", ^{
         it(@"returns an NSDictionary object", ^{
-            expect([appDelegate dictionaryOfSongsByArtistFromArray:songList]).to.beKindOf([NSDictionary class]);
+            expect([appDelegate songsGroupedByArtistFromArray:songList]).to.beKindOf([NSDictionary class]);
         });
 
         it(@"returns a dictionary of the alphabetized song names collected into arrays with their artist's name as the key", ^{
             
-            expect([appDelegate dictionaryOfSongsByArtistFromArray:songList]).to.equal(songsByArtist);
+            expect([appDelegate songsGroupedByArtistFromArray:songList]).to.equal(songsByArtist);
         });
     });
 });
