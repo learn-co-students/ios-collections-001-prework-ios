@@ -22,13 +22,13 @@
  
  */
 
--(NSArray *)arrayByAscendingSortingArray:(NSArray *)array {
+-(NSArray *)arrayBySortingArrayAscending:(NSArray *)array {
     NSSortDescriptor *sortByNilAsc = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
     
     return [array sortedArrayUsingDescriptors:@[sortByNilAsc]];
 }
 
--(NSArray *)arrayByDescendingSortingArray:(NSArray *)array {
+-(NSArray *)arrayBySortingArrayDescending:(NSArray *)array {
     NSSortDescriptor *sortByNilDesc = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
     
     return [array sortedArrayUsingDescriptors:@[sortByNilDesc]];
@@ -71,7 +71,7 @@
     return leetString;
 }
 
--(NSArray *)bisectArrayAt0:(NSArray *)array {
+-(NSArray *)splitArrayIntoNegativesAndPositives:(NSArray *)array {
     NSMutableArray *negative = [[NSMutableArray alloc] init];
     NSMutableArray *positive = [[NSMutableArray alloc] init];
     
@@ -86,7 +86,7 @@
     return @[negative, positive];
 }
 
--(NSArray *)arrayByFilteringHobbitsFromDictionary:(NSDictionary *)dictionary {
+-(NSArray *)namesOfHobbitsInDictionary:(NSDictionary *)dictionary {
     NSMutableArray *hobbits = [[NSMutableArray alloc] init];
     
     for (NSString *key in dictionary) {
@@ -98,7 +98,7 @@
     return [NSArray arrayWithArray:hobbits];
 }
 
--(NSArray *)arrayByFilteringStringsBeginningWithA:(NSArray *)array {
+-(NSArray *)stringsBeginningWithAInArray:(NSArray *)array {
     
     NSPredicate *beginsWithAPredicate = [NSPredicate predicateWithFormat:@"self BEGINSWITH[c] 'a'"];
     NSArray *beginsWithA = [array filteredArrayUsingPredicate:beginsWithAPredicate];
@@ -107,7 +107,7 @@
 }
 
 
--(NSInteger)sumOfIntegerNumbersInArray:(NSArray *)array {
+-(NSInteger)sumOfIntegersInArray:(NSArray *)array {
     
     NSInteger sum = 0;
     for (NSNumber *number in array) {
@@ -172,7 +172,7 @@
     return [NSDictionary dictionaryWithDictionary:countsOfWords];
 }
 
--(NSDictionary *)dictionaryOfSongsByArtistFromArray:(NSArray *)array {
+-(NSDictionary *)songsGroupedByArtistFromArray:(NSArray *)array {
     NSMutableDictionary *artistsWithSongs = [[NSMutableDictionary alloc] init];
     
     for (NSString *string in array) {
