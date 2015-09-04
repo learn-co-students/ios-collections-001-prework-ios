@@ -78,7 +78,7 @@
     for (NSNumber *number in array) {
         if ([number floatValue] < 0 ) {
             [negative addObject:number];
-        } else if ([number floatValue] > 0) {
+        } else if ([number floatValue] >= 0) {
             [positive addObject:number];
         }
     }
