@@ -185,24 +185,9 @@ return splitArray;
 
 -(NSDictionary *)songsGroupedByArtistFromArray:(NSArray *)artists
 {
-  // create the dictionary we are going to return
-  //
-  // now we want to loop through the array of artists!
-  //k,
-  // start loop
-  // parse the entry from the array and get artist, song
-  // check if the artist already has songs in our dictionary
-  // if they do, then we simply add this song to the list of songs
-  // if they don't then we need to create a list of songs and add this song to it
-  // end loop
-  //
-  // return the dictionary of artists and their songs and rejoice!
-  
-  /* BEFORE CLAIRE */
   
   NSMutableDictionary *songsGroupedbyArtist = [[NSMutableDictionary alloc]init];
-//  NSMutableArray *artistArray = [[NSMutableArray alloc]init];
-//  NSMutableDictionary *subDictionary = [[NSMutableDictionary alloc]init];
+
   
   
   for (NSUInteger i = 0; i<artists.count; i++) {
@@ -228,30 +213,6 @@ return splitArray;
     }
   }
   
-  
- 
-  
-//    subDictionary [subArray[0]] = subArray[1];
-//    if (songsGroupedbyArtist[subArray[0]]) {
-//      [songsGroupedbyArtist[subArray[0]] addObject:subArray[1]];
-//    }
-//    songsGroupedbyArtist = subDictionary;
-    
-  
-//  for (NSUInteger i = 0; i<artistArray.count; i++) {
-//   
-//    if (artistArray[i][0]) {
-//    
-//      songsGroupedbyArtist[artistArray[i][0]]= artistArray[i][1];
-//    }
-//     NSMutableArray *nestedArray = [[NSMutableArray alloc]init];
-//    songsGroupedbyArtist [artistArray[i][0]] = nestedArray;
-//    [nestedArray addObject:artistArray[i][1]];
-//    }
-  
-//    NSPredicate *filterSongsPredicate = [NSPredicate predicateWithFormat:@"self CONTAINS[c] %@", artistArray[i][0]];
-//    NSArray *filteredArtists = [artistArray filteredArrayUsingPredicate:filterSongsPredicate];
-//    songsGroupedbyArtist [artistArray[i][0]] =
   
   
   
