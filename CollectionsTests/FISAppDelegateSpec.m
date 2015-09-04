@@ -176,31 +176,31 @@ describe(@"FISAppDelegate", ^{
         it(@"returns an array with two sub-arrays", ^{
             expect([appDelegate splitArrayIntoNegativesAndPositives:numbersToBisect].count).to.equal(2);
         });
-        
-        it(@"returns an array with only values less than zero in the first sub-array", ^{
+    
+        it(@"returns the first sub-array with only the values that are less-than zero", ^{
             NSArray *bisectedArray = [appDelegate splitArrayIntoNegativesAndPositives:numbersToBisect];
             for (NSNumber *number in bisectedArray[0]) {
                 expect([number integerValue]).to.beLessThan(0);
             }
         });
         
-        it(@"returns an array with the correct number of values less than zero in the first sub-array", ^{
+        it(@"returns the first sub-array with four values that are less-than zero", ^{
             NSArray *bisectedArray = [appDelegate splitArrayIntoNegativesAndPositives:numbersToBisect];
             
             expect([bisectedArray[0] count]).to.equal(4);
         });
         
-        it(@"returns an array with only values greater than zero in the second sub-array", ^{
+        it(@"returns the second sub-array with only the values that are greater-than-or-equal-to zero", ^{
             NSArray *bisectedArray = [appDelegate splitArrayIntoNegativesAndPositives:numbersToBisect];
             for (NSNumber *number in bisectedArray[1]) {
                 expect([number integerValue]).to.beGreaterThanOrEqualTo(0);
             }
         });
         
-        it(@"returns an array with the correct number of values greater than zero in the first sub-array", ^{
+        it(@"returns the second sub-array with five values that are greater-than-or-equal-to zero", ^{
             NSArray *bisectedArray = [appDelegate splitArrayIntoNegativesAndPositives:numbersToBisect];
             
-            expect([bisectedArray[1] count]).to.equal(4);
+            expect([bisectedArray[1] count]).to.equal(5);
         });
     });
     
