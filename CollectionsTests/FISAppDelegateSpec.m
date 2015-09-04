@@ -176,7 +176,7 @@ describe(@"FISAppDelegate", ^{
         it(@"returns an array with two sub-arrays", ^{
             expect([appDelegate splitArrayIntoNegativesAndPositives:numbersToBisect].count).to.equal(2);
         });
-    
+        
         it(@"returns the first sub-array with only the values that are less-than zero", ^{
             NSArray *bisectedArray = [appDelegate splitArrayIntoNegativesAndPositives:numbersToBisect];
             for (NSNumber *number in bisectedArray[0]) {
