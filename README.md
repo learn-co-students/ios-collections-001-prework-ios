@@ -61,7 +61,7 @@ Now, write out the method bodies for each method one by one. Run the tests each 
 
 9. `sumOfIntegersInArray:` should add together all of the numbers in the submitted array and return the sum.
 
-10. `arrayByPluralizingStringsInArray:` should convert the different strings into their correct plural forms. This more complex than just adding an "s"; you'll have to run checks on the strings so be sure look at the test arrays so that you know the expected plural forms.
+10. `arrayByPluralizingStringsInArray:` should convert the different strings into their correct plural forms. This is more complex than just adding an "s"; you'll have to run checks on the strings so be sure look at the test arrays so that you know the expected plural forms.
 
 11. `countsOfWordsInString:` should return a dictionary that has a key for each word in the submitted string, whose associated value is the count of how many times that word appears in the argument string. Be sure to remove the punctuation (`.``,``-``;`) and ignore capitalization.
 
