@@ -1,10 +1,4 @@
-//
 //  FISAppDelegateSpec.m
-//  Collections
-//
-//  Created by Mark Murray on 7/10/15.
-//  Copyright 2015 FIS. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
 #import "Specta.h"
