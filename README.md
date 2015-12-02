@@ -74,3 +74,5 @@ Now, write out the method bodies for each method one by one. Run the tests each 
 
 [how_to_read_leet]: http://www.wikihow.com/Read-and-Write-in-1337
 [moby_dick]: http://www.online-literature.com/melville/mobydick/2/
+
+<a href='https://learn.co/lessons/ios-collections' data-visibility='hidden'>View this lesson on Learn.co</a>
