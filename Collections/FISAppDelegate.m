@@ -18,12 +18,18 @@
 
 - (NSArray *)arrayBySortingArrayDescending:(NSArray *)array
 {
-    return nil;
+    NSSortDescriptor *descending = [NSSortDescriptor sortDescriptorWithKey:@"self"
+                                                                ascending:NO];
+    NSArray *sorted = [array sortedArrayUsingDescriptors:@[descending]];
+    return sorted;
 }
 
 - (NSArray *)arrayBySortingArrayAscending:(NSArray *)array
 {
-    return nil;
+    NSSortDescriptor *ascending = [NSSortDescriptor sortDescriptorWithKey:@"self"
+                                                                 ascending:YES];
+    NSArray *sorted = [array sortedArrayUsingDescriptors:@[ascending]];
+    return sorted;
 }
 
 - (NSArray *)arrayBySwappingFirstObjectWithLastObjectInArray:(NSArray *)array
