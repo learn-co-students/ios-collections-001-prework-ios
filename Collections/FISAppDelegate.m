@@ -34,7 +34,9 @@
 
 - (NSArray *)arrayBySwappingFirstObjectWithLastObjectInArray:(NSArray *)array
 {
-    return nil;
+    NSMutableArray *temp = [array mutableCopy];
+    [temp exchangeObjectAtIndex:0 withObjectAtIndex:[array count] - 1];
+    return temp;
 }
 
 - (NSArray *)arrayByReversingArray:(NSArray *)array
