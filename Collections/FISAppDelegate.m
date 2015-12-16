@@ -101,7 +101,11 @@
 
 - (NSInteger)sumOfIntegersInArray:(NSArray *)array
 {
-    return nil;
+    NSInteger result = 0;
+    for (NSNumber *n in array) {
+        result += [n integerValue];
+    }
+    return result;
 }
 
 - (NSArray *)arrayByPluralizingStringsInArray:(NSArray *)array
