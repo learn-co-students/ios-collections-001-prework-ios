@@ -110,7 +110,23 @@
 
 - (NSArray *)arrayByPluralizingStringsInArray:(NSArray *)array
 {
-    return nil;
+    NSDictionary *specialCases = @{ @"box"       :    @"boxes"   ,
+                                    @"foot"      :    @"feet"    ,
+                                    @"ox"        :    @"oxen"    ,
+                                    @"radius"    :    @"radii"   ,
+                                    @"trivium"   :    @"trivia"  };
+    NSMutableArray *pluralStrings = [[NSMutableArray alloc] init];
+    
+    for (NSString *word in array) {
+        if ([specialCases objectForKey:word]) {
+            [pluralStrings addObject:specialCases[word]];
+        } else {
+            NSString *temp = [word stringByAppendingString:@"s"];
+            [pluralStrings addObject:temp];
+        }
+    }
+    
+    return pluralStrings;
 }
 
 - (NSDictionary *)countsOfWordsInString:(NSString *)string
