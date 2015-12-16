@@ -90,7 +90,13 @@
 
 - (NSArray *)stringsBeginningWithAInArray:(NSArray *)array
 {
-    return nil;
+    NSMutableArray *aStrings = [[NSMutableArray alloc] init];
+    for (NSString *string in array) {
+        if ([[string lowercaseString] hasPrefix:@"a"]) {
+            [aStrings addObject:string];
+        }
+    }
+    return aStrings;
 }
 
 - (NSInteger)sumOfIntegersInArray:(NSArray *)array
