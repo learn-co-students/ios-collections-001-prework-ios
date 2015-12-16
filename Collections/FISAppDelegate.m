@@ -136,7 +136,18 @@
 
 - (NSDictionary *)songsGroupedByArtistFromArray:(NSArray *)songs
 {
-    return nil;
+    NSMutableDictionary *songsByArtist = [[NSMutableDictionary alloc] init];
+    
+    for (NSString *entry in songs) {
+        NSArray *temp = [entry componentsSeparatedByString:@" - "];
+        if (![songsByArtist objectForKey:temp[0]]) {
+            songsByArtist[temp[0]] = @[temp[1]];
+        } else {
+            songsByArtist[temp[0]] = [songsByArtist[temp[0]] arrayByAddingObject:temp[1]];
+        }
+    }
+    
+    return songsByArtist;
 }
 
 @end
