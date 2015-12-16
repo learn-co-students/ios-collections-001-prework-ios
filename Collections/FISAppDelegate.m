@@ -41,7 +41,17 @@
 
 - (NSArray *)arrayByReversingArray:(NSArray *)array
 {
-    return nil;
+    NSMutableArray *temp = [array mutableCopy];
+    
+    NSUInteger i = 0;
+    NSUInteger j = [temp count] - 1;
+    while (i < j) {
+        [temp exchangeObjectAtIndex:i withObjectAtIndex:j];
+        i++;
+        j--;
+    }
+    
+    return temp;
 }
 
 - (NSArray *)stringInBasicLeetFromString:(NSString *)string
