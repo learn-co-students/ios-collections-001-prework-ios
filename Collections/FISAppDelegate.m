@@ -54,9 +54,13 @@
     return temp;
 }
 
-- (NSArray *)stringInBasicLeetFromString:(NSString *)string
+- (NSString *)stringInBasicLeetFromString:(NSString *)string
 {
-    return nil;
+    NSDictionary *swapValues = @{@"a": @"4", @"s": @"5", @"i": @"1", @"l": @"1", @"e": @"3", @"t": @"7"};
+    for (NSString *value in swapValues) {
+        string = [string stringByReplacingOccurrencesOfString:value withString:swapValues[value]];
+    }
+    return string;
 }
 
 - (NSArray *)splitArrayIntoNegativesAndPositives:(NSArray *)array
