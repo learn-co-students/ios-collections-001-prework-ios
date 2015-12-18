@@ -22,7 +22,7 @@
 
 - (NSArray *)stringsBeginningWithAInArray:(NSArray *)array;
 
-- (NSInteger *)sumOfIntegersInArray:(NSArray *)array;
+- (NSInteger)sumOfIntegersInArray:(NSArray *)array;
 
 - (NSArray *)arrayByPluralizingStringsInArray:(NSArray *)array;
 
