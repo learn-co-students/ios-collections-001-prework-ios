@@ -168,11 +168,11 @@
         artist = artistAndSongArray[0];
         song = artistAndSongArray[1];
         
-        if (artistAndSongsDictionary[artist]) {
-            [artistAndSongsDictionary[artist] addObject:song];
-        } else {
+        if (!artistAndSongsDictionary[artist]) {
             artistAndSongsDictionary[artist] = [[NSMutableArray alloc] init];
         }
+        
+        [artistAndSongsDictionary[artist] addObject:song];
     }
     
     NSSortDescriptor *sortSongsAlphabetically = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
