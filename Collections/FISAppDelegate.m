@@ -32,7 +32,12 @@
 
 - (NSArray *)arrayByReversingArray:(NSArray *)array {
     
-    return nil;
+    NSMutableArray *arrayCopy = [array mutableCopy];
+    for (int i = 0; i < floorf([array count]/2.0f); i++) {
+        [arrayCopy replaceObjectAtIndex:i withObject:array[[array count]-1-i]];
+        [arrayCopy replaceObjectAtIndex:[array count]-1-i withObject:array[i]];
+    }
+    return arrayCopy; // didn't use NSSortDescriptor though
 }
 
 - (NSString *)stringInBasicLeetFromString:(NSString *)string {
