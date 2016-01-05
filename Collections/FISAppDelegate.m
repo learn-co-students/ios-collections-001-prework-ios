@@ -78,7 +78,11 @@
 
 - (NSInteger)sumOfIntegersInArray:(NSArray *)array {
     
-    return 0;
+    NSInteger sum = 0;
+    for (NSNumber *number in array) {
+        sum += [number integerValue];
+    }
+    return sum;
 }
 
 - (NSArray *)arrayByPluralizingStringsInArray:(NSArray *)array {
