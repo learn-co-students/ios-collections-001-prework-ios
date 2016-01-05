@@ -42,7 +42,14 @@
 
 - (NSString *)stringInBasicLeetFromString:(NSString *)string {
     
-    return nil;
+    NSMutableString *mutableString = [string mutableCopy];
+    [mutableString replaceOccurrencesOfString:@"a" withString:@"4" options:NSDiacriticInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
+    [mutableString replaceOccurrencesOfString:@"s" withString:@"5" options:NSDiacriticInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
+    [mutableString replaceOccurrencesOfString:@"i" withString:@"1" options:NSDiacriticInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
+    [mutableString replaceOccurrencesOfString:@"l" withString:@"1" options:NSDiacriticInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
+    [mutableString replaceOccurrencesOfString:@"e" withString:@"3" options:NSDiacriticInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
+    [mutableString replaceOccurrencesOfString:@"t" withString:@"7" options:NSDiacriticInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
+    return mutableString; // didn't use NSSortDescriptor though
 }
 
 - (NSArray *)splitArrayIntoNegativesAndPositives:(NSArray *)array {
