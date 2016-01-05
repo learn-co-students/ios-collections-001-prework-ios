@@ -24,7 +24,10 @@
 
 - (NSArray *)arrayBySwappingFirstObjectWithLastObjectInArray:(NSArray *)array {
     
-    return nil;
+    NSMutableArray *arrayCopy = [array mutableCopy];
+    [arrayCopy replaceObjectAtIndex:0 withObject:array[[array count]-1]];
+    [arrayCopy replaceObjectAtIndex:[array count]-1 withObject:array[0]];
+    return arrayCopy; // didn't use NSSortDescriptor though
 }
 
 - (NSArray *)arrayByReversingArray:(NSArray *)array {
