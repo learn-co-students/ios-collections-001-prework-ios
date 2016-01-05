@@ -72,7 +72,8 @@
 
 - (NSArray *)stringsBeginningWithAInArray:(NSArray *)array {
     
-    return nil;
+    NSPredicate *aFilter = [NSPredicate predicateWithFormat:@"self BEGINSWITH 'a'"];
+    return [array filteredArrayUsingPredicate:aFilter];
 }
 
 - (NSInteger)sumOfIntegersInArray:(NSArray *)array {
