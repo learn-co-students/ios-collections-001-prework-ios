@@ -54,7 +54,9 @@
 
 - (NSArray *)splitArrayIntoNegativesAndPositives:(NSArray *)array {
     
-    return nil;
+    NSPredicate *negativeFilter = [NSPredicate predicateWithFormat:@"self < 0"];
+    NSPredicate *nonNegativeFilter = [NSPredicate predicateWithFormat:@"self >= 0"];;
+    return @[[array filteredArrayUsingPredicate:negativeFilter], [array filteredArrayUsingPredicate:nonNegativeFilter]];
 }
 
 - (NSArray *)namesOfHobbitsInDictionary:(NSDictionary *)dictionary {
