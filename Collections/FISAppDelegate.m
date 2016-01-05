@@ -18,7 +18,8 @@
 
 - (NSArray *)arrayBySortingArrayDescending:(NSArray *)array {
     
-    return nil;
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
+    return [array sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 - (NSArray *)arrayBySwappingFirstObjectWithLastObjectInArray:(NSArray *)array {
