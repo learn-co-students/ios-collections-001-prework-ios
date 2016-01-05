@@ -27,7 +27,7 @@
     NSMutableArray *arrayCopy = [array mutableCopy];
     [arrayCopy replaceObjectAtIndex:0 withObject:array[[array count]-1]];
     [arrayCopy replaceObjectAtIndex:[array count]-1 withObject:array[0]];
-    return arrayCopy; // didn't use NSSortDescriptor though
+    return arrayCopy;
 }
 
 - (NSArray *)arrayByReversingArray:(NSArray *)array {
@@ -37,7 +37,7 @@
         [arrayCopy replaceObjectAtIndex:i withObject:array[[array count]-1-i]];
         [arrayCopy replaceObjectAtIndex:[array count]-1-i withObject:array[i]];
     }
-    return arrayCopy; // didn't use NSSortDescriptor though
+    return arrayCopy;
 }
 
 - (NSString *)stringInBasicLeetFromString:(NSString *)string {
@@ -49,7 +49,7 @@
     [mutableString replaceOccurrencesOfString:@"l" withString:@"1" options:NSDiacriticInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
     [mutableString replaceOccurrencesOfString:@"e" withString:@"3" options:NSDiacriticInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
     [mutableString replaceOccurrencesOfString:@"t" withString:@"7" options:NSDiacriticInsensitiveSearch range:NSMakeRange(0, [mutableString length])];
-    return mutableString; // didn't use NSSortDescriptor though
+    return mutableString;
 }
 
 - (NSArray *)splitArrayIntoNegativesAndPositives:(NSArray *)array {
