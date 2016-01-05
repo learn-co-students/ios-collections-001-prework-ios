@@ -87,7 +87,33 @@
 
 - (NSArray *)arrayByPluralizingStringsInArray:(NSArray *)array {
     
-    return nil;
+    NSMutableArray *pluralizedStrings = [NSMutableArray arrayWithCapacity:[array count]];
+    NSString *singular, *plural;
+    NSUInteger singularLength;
+    for (int i = 0; i < [array count]; i++) {
+        singular = array[i];
+        singularLength = [singular length];
+        if ([singular isEqualToString:@"foot"]) {
+            plural = @"feet";
+        }
+        else if ([singular isEqualToString:@"ox"]) {
+            plural = @"oxen";
+        }
+        else if ([singular characterAtIndex:singularLength-1] == 'x') {
+            plural = [NSString stringWithFormat:@"%@es", singular];
+        }
+        else if ([[singular substringFromIndex:singularLength-2] isEqualToString:@"us"]) {
+            plural = [NSString stringWithFormat:@"%@i", [singular substringToIndex:singularLength-2]];
+        }
+        else if ([[singular substringFromIndex:singularLength-2] isEqualToString:@"um"]) {
+            plural = [NSString stringWithFormat:@"%@a", [singular substringToIndex:singularLength-2]];
+        }
+        else {
+            plural = [NSString stringWithFormat:@"%@s", singular];
+        }
+        [pluralizedStrings addObject:plural];
+    }
+    return pluralizedStrings;
 }
 
 - (NSDictionary *)countsOfWordsInString:(NSString *)string {
