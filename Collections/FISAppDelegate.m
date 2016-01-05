@@ -12,7 +12,8 @@
 
 - (NSArray *)arrayBySortingArrayAscending:(NSArray *)array {
     
-    return nil;
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
+    return [array sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 - (NSArray *)arrayBySortingArrayDescending:(NSArray *)array {
