@@ -72,7 +72,7 @@
 
 - (NSArray *)stringsBeginningWithAInArray:(NSArray *)array {
     
-    NSPredicate *aFilter = [NSPredicate predicateWithFormat:@"self BEGINSWITH 'a'"];
+    NSPredicate *aFilter = [NSPredicate predicateWithFormat:@"self BEGINSWITH[c] 'a'"];
     return [array filteredArrayUsingPredicate:aFilter];
 }
 
