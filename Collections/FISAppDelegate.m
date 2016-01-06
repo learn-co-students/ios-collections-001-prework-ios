@@ -138,7 +138,25 @@
 
 - (NSDictionary *)songsGroupedByArtistFromArray:(NSArray *)array {
     
-    return nil;
+    NSMutableDictionary *songsGroupedByArtist = [NSMutableDictionary dictionary];
+    NSString *artist, *title;
+    NSArray *artistAndTitle;
+    for (NSString *artistTitleString in array) {
+        artistAndTitle = [artistTitleString componentsSeparatedByString:@" - "];
+        artist = artistAndTitle[0];
+        title = artistAndTitle[1]; // assume that split works perfectly and produces two substrings
+        if ([[songsGroupedByArtist allKeys] containsObject:artist]) {
+            [songsGroupedByArtist[artist] addObject:title];
+        }
+        else {
+            [songsGroupedByArtist setObject:[NSMutableArray arrayWithObject:title] forKey:artist];
+        }
+    }
+    NSSortDescriptor *sortAlphabetically = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
+    for (artist in [songsGroupedByArtist allKeys]) {
+        [songsGroupedByArtist[artist] sortUsingDescriptors:@[sortAlphabetically]];
+    }
+    return songsGroupedByArtist;
 }
 
 @end
