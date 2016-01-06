@@ -118,7 +118,22 @@
 
 - (NSDictionary *)countsOfWordsInString:(NSString *)string {
     
-    return nil;
+    NSMutableCharacterSet *charactersToFilter = [[NSCharacterSet punctuationCharacterSet] mutableCopy];
+    [charactersToFilter formUnionWithCharacterSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSMutableArray *words = [[[string lowercaseString] componentsSeparatedByCharactersInSet:charactersToFilter] mutableCopy];
+    [words removeObject:@""];
+    NSMutableDictionary *countsOfWords = [NSMutableDictionary dictionary];
+    NSNumber *count;
+    for (NSString *word in words) {
+        count = countsOfWords[word];
+        if (count) {
+            countsOfWords[word] = @([count integerValue]+1);
+        }
+        else {
+            countsOfWords[word] = @1;
+        }
+    }
+    return countsOfWords;
 }
 
 - (NSDictionary *)songsGroupedByArtistFromArray:(NSArray *)array {
