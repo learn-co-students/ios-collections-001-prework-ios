@@ -7,8 +7,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    NSString *leet = @"leet sauce baby";
-    [self stringInBasicLeetFromString:leet];
+    
 
     return YES;
 }
@@ -81,17 +80,37 @@
 }
 
 -(NSArray *)splitArrayIntoNegativesAndPositives:(NSArray *)array {
-    NSSortDescriptor *numbersAscending = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
-    NSArray *ascendingNumbers = [array sortedArrayUsingDescriptors:@[numbersAscending]];
-    return ascendingNumbers;
+    
+    NSPredicate *positiveNumbersPredicate = [NSPredicate predicateWithFormat:@"self >= 0"];
+    NSPredicate *negativeNumbersPredicate = [NSPredicate predicateWithFormat:@"self < 0"];
+    
+    NSArray *positiveNumbersArray = [array filteredArrayUsingPredicate:positiveNumbersPredicate];
+    NSArray *negativeNumbersArray = [array filteredArrayUsingPredicate:negativeNumbersPredicate];
+    
+    NSArray *arrayWithSubPosAndSubNegNumbers = @[negativeNumbersArray, positiveNumbersArray];
+    
+    return arrayWithSubPosAndSubNegNumbers;
 }
 
 -(NSArray *)namesOfHobbitsInDictionary:(NSDictionary *)dictionary {
-    return nil;
+    
+    NSMutableArray *allHobits = [[NSMutableArray alloc]init];
+    
+    for (NSString *key in dictionary) {        
+        if ([dictionary[key] isEqualToString:@"hobbit"]) {
+            [allHobits addObject:key];
+        }
+    }
+    
+    return allHobits;
 }
 
 -(NSArray *)stringsBeginningWithAInArray:(NSArray *)array {
-    return nil;
+    
+    NSPredicate *stringBeginsWithAPredicate = [NSPredicate predicateWithFormat:@"self LIKE[c] 'a*'"];
+    NSArray *stringsBeginningWithA = [array filteredArrayUsingPredicate:stringBeginsWithAPredicate];
+    
+    return stringsBeginningWithA;
 }
 
 -(NSInteger)sumOfIntegersInArray:(NSArray *)array {
