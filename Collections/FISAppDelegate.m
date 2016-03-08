@@ -8,6 +8,10 @@
     // Override point for customization after application launch.
     
     
+    NSString *thisIsATest = @"T.his. is a test! That's cool, dude!  ";
+    [self countsOfWordsInString:thisIsATest];
+    
+    
 
     return YES;
 }
@@ -114,18 +118,94 @@
 }
 
 -(NSInteger)sumOfIntegersInArray:(NSArray *)array {
-    return 0;
+    NSInteger sum = 0;
+    for (NSNumber *number in array) {
+        NSInteger x = [number integerValue];
+        sum = sum + x;
+    }
+    return sum;
 }
 
 -(NSArray *)arrayByPluralizingStringsInArray:(NSArray *)array {
-    return nil;
+    
+    NSDictionary *pluralForms = @{@"hand" : @"hands",
+                                  @"foot" : @"feet",
+                                  @"knee" : @"knees",
+                                  @"table" : @"tables",
+                                  @"box" : @"boxes",
+                                  @"ox" : @"oxen",
+                                  @"axle" : @"axles",
+                                  @"radius" : @"radii",
+                                  @"trivium" : @"trivia"};
+    
+    NSMutableArray *plurals = [[NSMutableArray alloc]init];
+    for (NSString *string in array) {
+        NSPredicate *isInDictionary = [NSPredicate predicateWithFormat:@"self CONTAINS[c] %@", string];
+        BOOL havePluralForm = [[pluralForms allKeys] filteredArrayUsingPredicate:isInDictionary].count;
+        if (havePluralForm ) {
+            [plurals addObject:pluralForms[string]];
+        } else {
+            [plurals addObject:[NSString stringWithFormat:@"Plural form of \"%@\" is unknown.", string]];
+        }
+    }
+    
+    return plurals;
 }
 
 -(NSDictionary *)countsOfWordsInString:(NSString *)string {
+    
+    NSArray *punctuations = @[@".", @",", @"!", @"?", @"'", @":", @";"];
+    
+    NSMutableArray *wordsInString = [[NSMutableArray alloc]init];
+    NSString *wordInString = @"";
+    
+    //goes through each char in string to find spaces. The chars between spaces are built into a string and added to an array.
+    for (NSUInteger i = 0; i < [string length]; i++) {
+        unichar c = [string characterAtIndex:i];
+        NSString *charAsString = [NSString stringWithFormat:@"%c", c];
+        
+        //prevents punctuation from being added onto word
+        BOOL charIsPunctuation = 0;
+        for (NSString *punc in punctuations) {
+            if ([charAsString isEqualToString:punc]) {
+                charIsPunctuation = YES;
+            }
+        }
+        if (charIsPunctuation) {
+            continue;
+        }
+        
+        //detects a space to isolate the word and add it to array
+        BOOL charIsASpace = [charAsString isEqualToString:@" "];
+        if (charIsASpace) {
+            [wordsInString addObject:wordInString];
+            wordInString = @"";
+            
+        //adds last word to the array if the statment does not end with a space.
+        } else if (i == [string length] -1) {
+            wordInString = [wordInString stringByAppendingFormat:@"%@", charAsString];
+            [wordsInString addObject:wordInString];
+        
+        } else {
+            wordInString = [wordInString stringByAppendingFormat:@"%@", charAsString];
+        }
+        
+        NSLog(@"\n c: %c\n BoolCharIsASpaceBool: %d\n WordInString: %@", c, charIsASpace, wordInString);
+        NSLog(@"wordsInStringArray: %@", wordsInString);
+        
+        
+    }
+ 
+
+    
     return nil;
 }
 
 -(NSDictionary *)songsGroupedByArtistFromArray:(NSArray *)array {
+    
+    //NSSortDescriptor *test = [NSSortDescriptor sortDescriptorWithKey:array[1] ascending:YES selector:@selector(caseInsensitiveCompare:)];
+    //NSMutableDictionary *sortedByArtist = [[array self] sortedArrayUsingDescriptors:@[test]];
+    //NSLog(@"sort by artist: %@", sortedByArtist);
     return nil;
 }
 
