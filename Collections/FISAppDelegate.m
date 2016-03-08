@@ -8,8 +8,18 @@
     // Override point for customization after application launch.
     
     
-    NSString *thisIsATest = @"T.his. is a test! That's cool, dude!  ";
-    [self countsOfWordsInString:thisIsATest];
+    NSArray *songList = @[ @"Coldplay - Strawberry Swing"        ,
+                  @"Johnny Flynn - In April"            ,
+                  @"Coldplay - Clocks"                  ,
+                  @"Sigur Rós - Andvari"                ,
+                  @"Ryan Adams - When The Stars Go Blue",
+                  @"Coldplay - Viva la Vida"            ,
+                  @"Johnny Flynn - Cold Bread"          ,
+                  @"Sigur Rós - Glósóli"                ,
+                  @"Ryan Adams - La Cienega Just Smiled"
+                  ];
+;
+    [self songsGroupedByArtistFromArray:songList];
     
     
 
@@ -154,7 +164,7 @@
 
 -(NSDictionary *)countsOfWordsInString:(NSString *)string {
     
-    NSArray *punctuations = @[@".", @",", @"!", @"?", @"'", @":", @";"];
+    NSArray *punctuations = @[@".", @",", @"!", @"?", @":", @";", @"-"];
     
     NSMutableArray *wordsInString = [[NSMutableArray alloc]init];
     NSString *wordInString = @"";
@@ -164,48 +174,95 @@
         unichar c = [string characterAtIndex:i];
         NSString *charAsString = [NSString stringWithFormat:@"%c", c];
         
-        //prevents punctuation from being added onto word
-        BOOL charIsPunctuation = 0;
+        
+        //prevents punctuation from being added onto word that will be added to array
+        BOOL charIsPunctuation = NO;
         for (NSString *punc in punctuations) {
             if ([charAsString isEqualToString:punc]) {
                 charIsPunctuation = YES;
             }
         }
-        if (charIsPunctuation) {
+        if (charIsPunctuation && i != [string length]-1) { 
             continue;
         }
+        
         
         //detects a space to isolate the word and add it to array
         BOOL charIsASpace = [charAsString isEqualToString:@" "];
         if (charIsASpace) {
             [wordsInString addObject:wordInString];
             wordInString = @"";
+        
+        //adds last word to array if last char is punctuation.
+        }else if (charIsPunctuation) {
+            [wordsInString addObject:wordInString];
             
         //adds last word to the array if the statment does not end with a space.
-        } else if (i == [string length] -1) {
+        } else if (i == [string length]-1) {
             wordInString = [wordInString stringByAppendingFormat:@"%@", charAsString];
             [wordsInString addObject:wordInString];
         
         } else {
             wordInString = [wordInString stringByAppendingFormat:@"%@", charAsString];
         }
-        
-        NSLog(@"\n c: %c\n BoolCharIsASpaceBool: %d\n WordInString: %@", c, charIsASpace, wordInString);
-        NSLog(@"wordsInStringArray: %@", wordsInString);
-        
-        
     }
+    NSLog(@"wordsInStringArray: %@", wordsInString);
+    
+    //determines how many times the word comes up in the string and adds it to dictionart
+    NSMutableDictionary *keyWordValueCount = [[NSMutableDictionary alloc]init];
+    
+    //prevents for loop from double counting words once they have been added to dictionary
+    for (NSString *word in wordsInString) {
+        for (NSString *key in keyWordValueCount) {
+            if ([word isEqualToString:key]) {
+                continue;
+            }
+        }
+        
+        NSPredicate *filterWordPredicate = [NSPredicate predicateWithFormat:@"self LIKE[c] %@", word];
+        NSInteger numberOfOccurancesOfWordInString = [wordsInString filteredArrayUsingPredicate:filterWordPredicate].count;
+        NSNumber *valueForWord = @(numberOfOccurancesOfWordInString);
+        keyWordValueCount[[word lowercaseString]] = valueForWord; //lower case key is needed to pass test!
+    }
+    NSLog(@"%@", keyWordValueCount);
  
 
     
-    return nil;
+    return keyWordValueCount;
 }
 
 -(NSDictionary *)songsGroupedByArtistFromArray:(NSArray *)array {
     
-    //NSSortDescriptor *test = [NSSortDescriptor sortDescriptorWithKey:array[1] ascending:YES selector:@selector(caseInsensitiveCompare:)];
-    //NSMutableDictionary *sortedByArtist = [[array self] sortedArrayUsingDescriptors:@[test]];
-    //NSLog(@"sort by artist: %@", sortedByArtist);
+    NSMutableDictionary *artistsAndSongs = [[NSMutableDictionary alloc]init];
+    
+    //get artits name and add to an array
+    NSMutableArray *songsByArtist = [[NSMutableArray alloc]init];
+    for (NSString *string in array) {
+        
+        NSString *artist = @"";
+        BOOL artistWasFound = NO;
+        
+        for (NSUInteger i = 0; i < [string length]; i++) {
+            unichar c = [string characterAtIndex:i];
+            NSString *charAsString = [NSString stringWithFormat:@"%c", c];
+            
+            if ([charAsString isEqualToString:@"-"]) {
+                artist = [artist stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                artistsAndSongs[artist] = [[NSMutableArray alloc]init];
+                NSLog(@"%@", artistsAndSongs);
+                artistWasFound = YES;
+                
+            }else if (!artistWasFound){
+                artist = [artist stringByAppendingString:charAsString];
+                
+            }
+        }
+    }
+    NSLog(@"%@", artistsAndSongs);
+    
+    //get song name and make them a
+         
+
     return nil;
 }
 
