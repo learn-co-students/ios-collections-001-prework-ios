@@ -208,7 +208,7 @@
     }
     NSLog(@"wordsInStringArray: %@", wordsInString);
     
-    //determines how many times the word comes up in the string and adds it to dictionart
+    //determines how many times the word comes up in the string and adds it to dictionary
     NSMutableDictionary *keyWordValueCount = [[NSMutableDictionary alloc]init];
     
     //prevents for loop from double counting words once they have been added to dictionary
@@ -233,37 +233,56 @@
 
 -(NSDictionary *)songsGroupedByArtistFromArray:(NSArray *)array {
     
-    NSMutableDictionary *artistsAndSongs = [[NSMutableDictionary alloc]init];
     
-    //get artits name and add to an array
-    NSMutableArray *songsByArtist = [[NSMutableArray alloc]init];
+    NSMutableDictionary *artistsAndSongs = [[NSMutableDictionary alloc]init];
+    NSMutableDictionary *songByArtistDictionary = [[NSMutableDictionary alloc]init];
+    
+    //finds each song and artist and adds them to a dictionary where song title is key and artist is the value
     for (NSString *string in array) {
         
         NSString *artist = @"";
+        NSString *song = @"";
         BOOL artistWasFound = NO;
         
         for (NSUInteger i = 0; i < [string length]; i++) {
             unichar c = [string characterAtIndex:i];
             NSString *charAsString = [NSString stringWithFormat:@"%c", c];
             
-            if ([charAsString isEqualToString:@"-"]) {
+            if ([charAsString isEqualToString:@"-" ] && !artistWasFound) {
                 artist = [artist stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                 artistsAndSongs[artist] = [[NSMutableArray alloc]init];
-                NSLog(@"%@", artistsAndSongs);
                 artistWasFound = YES;
                 
-            }else if (!artistWasFound){
+            } else if (!artistWasFound){
                 artist = [artist stringByAppendingString:charAsString];
+            }
+            
+            if (artistWasFound && i != [string length]-1) {
+                song = [song stringByAppendingString:charAsString];
                 
+            } else if ([string length]-1 == i) {
+                song = [song stringByAppendingString:charAsString];
+                song = [song stringByReplacingOccurrencesOfString:@"-" withString:@""];
+                song = [song stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                songByArtistDictionary[song] = artist;
             }
         }
     }
-    NSLog(@"%@", artistsAndSongs);
     
-    //get song name and make them a
-         
+    //add song to array that is the artist value in artistsAndSongs
+    for (NSString *key in songByArtistDictionary) {
+        NSString *addToArtist = [NSString stringWithFormat:@"%@", songByArtistDictionary[key]];
+        [artistsAndSongs[addToArtist] addObject:key];
+    }
+   
+    //alphabatize song arrays
+    for (NSString *key in artistsAndSongs) {
+        [artistsAndSongs[key] sortUsingSelector:@selector(caseInsensitiveCompare:)];
+    }
+    
+    NSLog(@"%@", artistsAndSongs);
 
-    return nil;
+    return artistsAndSongs;
 }
 
 @end
