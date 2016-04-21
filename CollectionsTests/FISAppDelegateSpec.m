@@ -52,14 +52,14 @@ describe(@"FISAppDelegate", ^{
         foodsBeginningWithA = @[@"almond", @"avocado", @"Apple Crings", @"artichoke"];
         
         singulars = @[ @"hand"   ,
-                       @"foot"   ,
+                       @"foot"   , //yes
                        @"knee"   ,
                        @"table"  ,
-                       @"box"    ,
-                       @"ox"     ,
+                       @"box"    , //yes
+                       @"ox"     , //yes
                        @"axle"   ,
-                       @"radius" ,
-                       @"trivium"];
+                       @"radius" , //yes
+                       @"trivium"]; //yes
         
         plurals = @[ @"hands" ,
                      @"feet"  ,
