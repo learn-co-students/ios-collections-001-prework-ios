@@ -4,6 +4,18 @@
 
 @implementation FISAppDelegate
 
+// Objectives:
+// 1. Sort an array.
+// 2. Reverse an array.
+// 3. Change characters in a string.
+// 4. Split an array.
+// 5. Filter the values in a dictionary.
+// 6. Filter an array.
+// 7. Alter multiple substrings according to certain conditions.
+// 8. Alter strings in an array according to certain conditions.
+// 9. Collect data on a string's contents into a dictionary ignoring punctation and case.
+// 10. Convert information in strings into a nested collection.
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
