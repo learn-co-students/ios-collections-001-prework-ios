@@ -207,13 +207,35 @@
 //For example, if given the string "I think, I thought; I think I.", the method should return @{ @"i": @4, @"think": @2, @"thought": @1 }.
 
 -(NSDictionary *)countsOfWordsInString : (NSString *)string{
+    NSArray *punctuation = @[@".",@",",@"?",@"!",@":",@"-"];
+    NSString *stringWithoutPunctuation = string;
+    for (NSString *punctuationMarks in punctuation) {
+        [stringWithoutPunctuation stringByReplacingOccurrencesOfString:punctuationMarks withString:@" "];
+    }
+    NSString *lowercaseAndWithoutPunctuation = [stringWithoutPunctuation lowercaseString];
+    NSArray *arrayOfWords = [lowercaseAndWithoutPunctuation componentsSeparatedByString:@" "];
+    
+    NSMutableDictionary *countOfWords = [[NSMutableDictionary alloc] init];
+    for (NSString *word in arrayOfWords) {
+        if ([countOfWords[word] integerValue] > 0) {
+            NSInteger addOneToCount = [countOfWords[word] integerValue]+1;
+            countOfWords[word] = @(addOneToCount);
+        }
+        else {
+            countOfWords[word] = @1;
+        }
+    }
+
+
+    return countOfWords;
+}
+
+//songsGroupedByArtistFromArray: that takes one NSArray argument and returns an NSDictionary.
+-(NSDictionary *)songsGroupedByArtistFromArray : (NSArray *)array{
     
 
 
 
 }
-
-//songsGroupedByArtistFromArray: that takes one NSArray argument and returns an NSDictionary.
--(NSDictionary *)songsGroupedByArtistFromArray : (NSArray *)array{ return nil; }
 
 @end
