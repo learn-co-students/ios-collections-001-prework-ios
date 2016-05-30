@@ -9,6 +9,7 @@
 
     return YES;
 }
+
 //arrayBySortingArrayAscending: that takes one NSArray argument and returns and NSArray.
 
 //arrayBySortingArrayAscending: should return the objects in the submitted array arranged from low to high.
@@ -207,35 +208,69 @@
 //For example, if given the string "I think, I thought; I think I.", the method should return @{ @"i": @4, @"think": @2, @"thought": @1 }.
 
 -(NSDictionary *)countsOfWordsInString : (NSString *)string{
-    NSArray *punctuation = @[@".",@",",@"?",@"!",@":",@"-"];
+    NSArray *punctuationMarks = @[@".",@",",@"-",@";"];
     NSString *stringWithoutPunctuation = string;
-    for (NSString *punctuationMarks in punctuation) {
-        [stringWithoutPunctuation stringByReplacingOccurrencesOfString:punctuationMarks withString:@" "];
+    for (NSString *punctuation in punctuationMarks) {
+        stringWithoutPunctuation = [stringWithoutPunctuation stringByReplacingOccurrencesOfString:punctuation withString:@""];
     }
-    NSString *lowercaseAndWithoutPunctuation = [stringWithoutPunctuation lowercaseString];
-    NSArray *arrayOfWords = [lowercaseAndWithoutPunctuation componentsSeparatedByString:@" "];
+    NSString *stringWithoutPunctuationAndLower = [stringWithoutPunctuation lowercaseString];
+    NSArray *arrayOfWords = [stringWithoutPunctuationAndLower componentsSeparatedByString:@" "];
     
     NSMutableDictionary *countOfWords = [[NSMutableDictionary alloc] init];
     for (NSString *word in arrayOfWords) {
-        if ([countOfWords[word] integerValue] > 0) {
+        //for the case of a new word added to the dictionary.
+        if ([countOfWords[word] integerValue] == 0) {
+            countOfWords[word] = @1;
+                    }
+        else {
+            //for the case of more than that.
             NSInteger addOneToCount = [countOfWords[word] integerValue]+1;
             countOfWords[word] = @(addOneToCount);
-        }
-        else {
-            countOfWords[word] = @1;
         }
     }
 
 
-    return countOfWords;
+    return [NSDictionary dictionaryWithDictionary:countOfWords];
 }
 
 //songsGroupedByArtistFromArray: that takes one NSArray argument and returns an NSDictionary.
+
+//songsGroupedByArtistFromArray: takes an array of strings of the form "Artist - Title" and should return a dictionary containing a key for each artist, whose value is an array of strings containing song names by that artist. You'll have to split each string and arrange its information into the correct place in the nested data structure. Be sure to alphabetize the arrays of songs before returning the dictionary. If you're using mutable arrays inside the dictionary, you can use the sortUsingDescriptors: method.
+
 -(NSDictionary *)songsGroupedByArtistFromArray : (NSArray *)array{
+    NSMutableDictionary *songsByArtist = [[NSMutableDictionary alloc] init];
+    NSSortDescriptor *sortingByAscNil = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
     
+    for (NSString *element in array) {
+        NSArray *splitArtistThenSong = [element componentsSeparatedByString:@" - "];
+        NSString *artist = splitArtistThenSong[0];
+        NSString *song = splitArtistThenSong[1];
+        
+        if (songsByArtist[artist]) {
+            //for the case that the artist is being repeated, add the song to the artist, don't create a new key value pair.
+            NSMutableArray *artistAlbum = songsByArtist[artist];
+            [artistAlbum addObject:song];
+        }
+        else {
+            songsByArtist[artist] = [@[song] mutableCopy];
+            //songsByArtist[artist] = [[NSMutableArray alloc] initWithObjects:song, nil];
+        }
+        
+    }
+    for (NSArray *artists in songsByArtist) {
+        [songsByArtist[artists] sortedArrayUsingDescriptors:@[sortingByAscNil]];
 
-
-
+    }
+    for (NSString *artist in [songsByArtist allKeys]) {
+                NSArray *sortedSongs = [self arrayBySortingArrayAscending:songsByArtist[artist]];
+                [songsByArtist setObject:sortedSongs forKey:artist];
+    }
+    return [NSDictionary dictionaryWithDictionary:songsByArtist];
 }
 
+
 @end
+
+
+//expected: {Coldplay = (Clocks, Strawberry Swing, Viva la Vida); Johnny Flynn = (Cold Bread, In April); Ryan Adams = (La Cienega Just Smiled, When The Stars Go Blue); Sigur Rós = (Andvari, Glósóli);},
+//got: {Coldplay = (Strawberry Swing, Clocks, Viva la Vida); Johnny Flynn = (In April, Cold Bread); Ryan Adams = (When The Stars Go Blue, La Cienega Just Smiled); Sigur Rós = (Andvari, Glósóli);}
