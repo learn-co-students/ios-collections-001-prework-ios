@@ -6,10 +6,31 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-/**
- 
- * Declare your methods here.
- 
- */
+-(NSArray *)arrayBySortingArrayAscending:(NSArray*)arrayToSort;
+
+-(NSArray *)arrayBySortingArrayDescending:(NSArray *)arrayToSort;
+
+-(NSArray *)arrayBySwappingFirstObjectWithLastObjectInArray:(NSArray *)arrayToSwap;
+
+-(NSArray *)arrayByReversingArray:(NSArray *)arrayToReverse;
+
+-(NSString *)stringInBasicLeetFromString:(NSString *)leetString;
+
+-(NSArray *)splitArrayIntoNegativesAndPositives:(NSArray *)negativeAndPositiveArray;
+
+-(NSArray *)namesOfHobbitsInDictionary:(NSDictionary *)hobbitDictionary;
+
+-(NSArray *)stringsBeginningWithAInArray:(NSArray *)arrayOfStrings;
+
+-(NSInteger)sumOfIntegersInArray:(NSArray *)integerArray;
+
+-(NSArray *)arrayByPluralizingStringsInArray:(NSArray *)stringArray;
+
+-(NSDictionary *)countsOfWordsInString:(NSString *)string;
+
+-(NSDictionary *)songsGroupedByArtistFromArray:(NSArray *)songsArray;
+
+
+
 
 @end
