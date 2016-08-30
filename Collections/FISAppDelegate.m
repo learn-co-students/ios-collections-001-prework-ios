@@ -15,6 +15,7 @@
     NSSortDescriptor *sortByAsc = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
     
     return [array sortedArrayUsingDescriptors:@[sortByAsc]];
+    
 }
 - (NSArray*)arrayBySortingArrayDescending:(NSArray*)array{
     
@@ -23,9 +24,10 @@
     return [array sortedArrayUsingDescriptors:@[sortByDesc]];
 }
 
+
 - (NSArray*)arrayBySwappingFirstObjectWithLastObjectInArray:(NSArray*)array {
     
-    NSMutableArray *index = [[NSMutableArray alloc]init];
+    NSMutableArray *index = [array mutableCopy];
     NSUInteger endIndex = index.count - 1;
     
     [index exchangeObjectAtIndex:0 withObjectAtIndex:endIndex];
@@ -34,7 +36,7 @@
 
 - (NSArray*)arrayByReversingArray:(NSArray*)array {
     
-    NSMutableArray *reversedArray = [[NSMutableArray alloc]init];
+    NSMutableArray *reversedArray = [array mutableCopy];
     
     for (NSUInteger i = 0; i < (reversedArray.count / 2); i++) {
         
@@ -83,8 +85,7 @@
         }
     }
     
-    return negativeNum;
-    return positiveNum;
+    return @[negativeNum, positiveNum];
 }
 
 - (NSArray*)namesOfHobbitsInDictionary: (NSDictionary*)dictionary {
@@ -127,57 +128,116 @@
     
     NSMutableArray *plurals = [[NSMutableArray alloc] init];
     
-    NSString *noPunc = @"";
-    
-    for (NSString *singularString in plurals) {
+    for (NSString *word in array) {
         
-        [noPunc stringByReplacingOccurrencesOfString:singularString withString:@""];
-    }
-    
-    NSString *lowerCase = [noPunc lowercaseString];
-    NSArray *words = [lowerCase componentsSeparatedByString:@""];
-    
-    NSMutableDictionary *countOfWord = [[NSMutableDictionary alloc] init];
-    
-    for (NSString *singleWord in words) {
+        NSString *plural = @"";
         
-        if ([countOfWord[singleWord] integerValue] > 0){
-            NSInteger newCount = [countOfWord[singleWord] integerValue] +1;
-            countOfWord[singleWord] = @(newCount);
+        if ([word containsString:@"oo"]) {
+            
+            plural = [word stringByReplacingOccurrencesOfString:@"oo" withString:@"ee"];
+            
+            
+        } else if ([word containsString:@"ox"]) {
+            
+            if ([word hasPrefix:@"b"]) {
+                
+                plural = [word stringByAppendingString:@"es"];
+                
+            } else {
+                
+                plural = [word stringByAppendingString:@"en"];
+            }
+            
+        } else if ([word containsString:@"us"]) {
+            
+            plural = [word stringByReplacingOccurrencesOfString:@"us" withString: @"i"];
+            
+        } else if ([word containsString:@"um"]) {
+            
+            plural = [word stringByReplacingOccurrencesOfString:@"um" withString:@"a"];
             
         } else {
             
-            countOfWord[singleWord] = @1;
+            plural = [word stringByAppendingString:@"s"];
+            
         }
+        
+        [plurals addObject:plural];
+        
     }
     
+    return plurals;
     
-    
-    return [NSDictionary dictionaryWithDictionary:countOfWord];
 }
 
 - (NSDictionary*)countsOfWordsInString: (NSString*)string {
     
     NSArray *punctuationArray = @[@"-",@".",@",",@":",@";"];
     
-    NSString *noPunc = @"";
+    NSString *noPunc = [string mutableCopy];
     
     for (NSString *punctuation in punctuationArray) {
+        
+        noPunc = [noPunc stringByReplacingOccurrencesOfString:punctuation withString:@""];
+    }
+    
+    NSString *noPuncLowerCase = [noPunc lowercaseString];
+    
+    NSArray *noPuncLowerArray = [noPuncLowerCase componentsSeparatedByString:@" "];
+    
+    
+    NSMutableDictionary *count = [[NSMutableDictionary alloc] init];
+    
+    for (NSString *word in noPuncLowerArray) {
+        
+        if ([count[word] integerValue] > 0) {
+            
+            NSInteger numWords = [count[word] integerValue] + 1;
+            count[word] = @(numWords);
+            
+            
+        } else {
+            
+            count[word] = @1;
+        }
         
         
     }
     
-    return punctuationArray;
+    return count;
 }
+
+
 
 - (NSDictionary*)songsGroupedByArtistFromArray:(NSArray*)array {
     
     NSMutableDictionary *artistsGrouped = [[NSMutableDictionary alloc] init];
+
     
     for (NSString *string in array) {
         
+        NSArray *artistSong = [string componentsSeparatedByString:@" - "];
+        NSString *artist = artistSong[0];
+        NSString *song = artistSong[1];
+        
+        
+        if ([[artistsGrouped allKeys] containsObject:artist]) {
+            
+            [artistsGrouped[artist] addObject:song];
+            
+        } else {
+            
+            artistsGrouped[artist] = [@[song] mutableCopy];
+        }
+    }
+    
+    NSSortDescriptor *artistsAlph = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
+    for (NSString *artist in artistsGrouped) {
+        
+        [artistsGrouped[artist] sortUsingDescriptors:@[artistsAlph]];
         
     }
+    
     
     return artistsGrouped;
 }

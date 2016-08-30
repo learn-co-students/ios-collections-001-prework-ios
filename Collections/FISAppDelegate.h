@@ -14,7 +14,7 @@
 - (NSArray*)splitArrayIntoNegativesAndPositives: (NSArray*)array;
 - (NSArray*)namesOfHobbitsInDictionary: (NSDictionary*)dictionary;
 - (NSArray*)stringsBeginningWithAInArray: (NSArray*)array;
-- (NSInteger*)sumOfIntegersInArray: (NSArray*)array;
+- (NSInteger)sumOfIntegersInArray: (NSArray*)array;
 - (NSArray*)arrayByPluralizingStringsInArray: (NSArray*)array;
 - (NSDictionary*)countsOfWordsInString: (NSString*)string;
 - (NSDictionary*)songsGroupedByArtistFromArray:(NSArray*)array;
